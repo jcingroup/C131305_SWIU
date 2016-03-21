@@ -1,0 +1,19 @@
+﻿@model DotWeb.Apply
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>美國西南大學 - 報名申請表</title>
+    </head>
+    <body style="font: .8em/140% '微軟正黑體', 'Microsoft JhengHei', Helvetica, sans-serif;">
+        <h1 style="font-size:1.5em;">SWIU - 報名申請表</h1>
+        <p>以下為報名者的基本資料：</p>
+        <table border="1" bordercolor="#ddd">
+            <tr><td style="width:120px; color:#00A99D; padding:5px;">姓名</td>  <td style="width:220px; padding:5px;">@Model.name</td></tr>
+            <tr><td style="color:#00A99D; padding:5px;">聯絡電話</td>  <td style="padding:5px;">@Model.tel</td></tr>
+            <tr><td style="color:#00A99D; padding:5px;">E-mail</td>  <td style="padding:5px;">@Model.email</td></tr>
+            <tr><td style="color:#00A99D; padding:5px;">希望就讀學系</td>  <td style="padding:5px;">@Model.ex_school - @Model.ex_department</td></tr>
+            <tr><td style="color:#00A99D; padding:5px;">居住國家</td>  <td style="padding:5px;">@Model.country</td></tr>
+            <tr><td colspan="2">@Model.memo</td></tr>
+        </table>
+    </body>
+</html>

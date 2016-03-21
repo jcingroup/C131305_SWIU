@@ -1,0 +1,234 @@
+﻿@charset "utf-8";
+
+/*      CSS reset::YUI 3.6.0 (20130312)
+-----------------------------------------------------------------------*/
+body,div,
+dl,dt,dd,ul,ol,li,
+h1,h2,h3,h4,h5,h6,
+pre,code,
+form,fieldset,legend,input,textarea,
+p,blockquote,
+th,td{margin:0;padding:0;vertical-align:baseline;vertical-align:bottom\9;}
+
+body{line-height:1;-webkit-text-size-adjust:none;} /* -webkit-...消除chrome的最小字型限制 */
+
+table{border-collapse:collapse;border-spacing:0}
+
+fieldset,img{border:0}
+
+address,caption,cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:normal}
+
+ol,ul{list-style:none}
+
+caption,th{text-align:left}
+
+h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal}
+
+blockquote, q {quotes: none;}
+blockquote:before, blockquote:after,
+q:before, q:after {content: ''; content: none;}
+
+abbr,acronym{border:0;font-variant:normal}
+
+sup{vertical-align:text-top}
+sub{vertical-align:text-bottom}
+
+input,textarea,select{font-family:inherit;font-size:inherit;font-weight:inherit}
+input,textarea,select{*font-size:100%}
+
+
+a,a:link,a:active,a:visited {
+    text-decoration: none;
+    vertical-align:baseline; vertical-align:middle\9;
+    outline: none; /* ff 消除虛線框*/
+    blur:expression(this.onFocus=this.blur()); /* ie消除虛線框 */
+    }
+a:focus {
+    outline: none;
+    -moz-outline-style: none; /* ff 消除虛線框 */
+    }
+
+
+/*      basic elements
+-----------------------------------------------------------------------*/
+a {
+    color:#0084B4;
+    line-height:120%;
+    
+    -webkit-transition: color .5s ease;
+    -moz-transition: color .5s ease;
+    -o-transition: color .5s ease;
+    transition: color .5s ease;
+    }
+a:hover {
+    color: #999;
+    }
+
+h3 { 
+    color:#0084B4;
+    font: italic normal 2.4em/100% Tahoma, Geneva, sans-serif;
+    margin:15px 20px 10px 0;
+    }
+h4 {
+    color:#751721;
+    font: italic normal 1.7em/100% Tahoma, Geneva, sans-serif;
+    margin:20px 20px 10px 0;
+    }
+h5 {
+    color:#00A99D;
+    font-size:1.5em;
+    margin:20px 20px 10px 0;
+    }
+
+p {
+    text-align:justify;
+    text-justify: inter-ideograph;
+    line-height:160%;
+    margin:10px 20px 15px 0;
+    }
+
+strong {
+    color:#751721;
+    font-size:1.5em;
+    font-weight:bold;
+    }
+
+cite {
+    color:#313131;
+    font-size:1.2em;
+    font-weight:bold;
+    line-height:160%;
+    display:block;
+    margin:20px 0;
+    }
+
+hr {
+    border:none;
+    border-top:1px solid #F2F2F2;
+    margin:30px 0;
+    clear:both;
+    }
+
+label {
+    color:#0064BE;
+    font-weight:lighter
+    }
+input {
+    vertical-align:middle;
+    }
+
+
+
+/*      Generic Classes
+-----------------------------------------------------------------------*/
+.full { width:100% } /* 寬度100% */
+.center { text-align:center } /* 水平罝中,文字置中 */
+.valignM { vertical-align:middle; } /* 垂直置中 */
+.floatL { float:left; margin:0 20px 10px 0; } /* 文繞圖-左 */
+.floatR { float:right; margin:0 20px 10px 20px; } /* 文繞圖-右 */
+.textL { text-align:left; } /* 向左對齊 */
+.textR { text-align:right; } /* 向右對齊 */
+.clearfix { clear:both } /* 清除浮動 */
+.msg { color:#D50000 } /* 提示信息 */
+
+.more {
+    background-attachment: fixed;
+    background: url('../../images/index/more.gif') no-repeat 0 0;
+    display:block;
+    text-indent:-9999px;
+    width:135px; height:25px;
+    }
+.more:hover {
+    background-position: 0 -38px; 
+    }
+
+.note {
+    color:#F7931E;
+    text-indent:-44px;
+    margin-left:44px;
+    clear:both;
+    }
+
+.btn {
+    background-attachment: fixed;
+    background: url('../../images/btn.gif') no-repeat 0 0;
+    border:none;
+    color:#fff;
+    text-align:center;
+    padding:0 10px 0 0;
+    width:66px; height:25px;
+    cursor:pointer; cursor:hand;
+    }
+.btn:hover {
+    background-position: 0 -40px; 
+    }
+
+ul {
+    margin:0 20px 15px 0;
+    }
+ul li {
+    background: url('../images/icon_arrow.gif') no-repeat 0 5px;
+    color:#998675;
+    padding-left:14px;
+    margin:7px 0;
+    }
+img {
+    max-width: 100%;
+    }
+
+.col2 {
+    float:left;
+    width:320px;
+    }
+.title {
+    background:none;
+    color:#751721;
+    font: 1.4em/100% Tahoma, Geneva, sans-serif;
+    padding:0;
+    }
+
+.picList {
+    overflow:hidden;
+    }
+.picList li {
+    float:left;
+    text-align:center;
+    width:160px;
+    }
+.picList em {
+    display:block;
+    }
+
+.subNav {
+    margin-bottom:15px;
+    }
+.data { width:100%; }
+.data th,
+.data td {
+ padding:5px;
+ }
+.data th {
+ background:#731021;
+ color:#fff;
+ }
+.data td {
+ border-bottom:1px solid #eee;
+ }
+
+/*-- 僱員 -- */
+.floatR em {
+    display:block;
+    width:160px;
+    }
+
+/*-- 簡章文件 -- */
+.dl {
+    background:#FBB03B;
+    color:#fff;
+    display:inline-block;
+    padding:0 2px;
+    margin-left:10px;
+    }
+.dl:hover {
+    background:#0081B4;
+    }

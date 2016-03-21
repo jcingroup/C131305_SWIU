@@ -1,0 +1,125 @@
+﻿@model ProcCore.Business.Logic.q_Schools
+@using ProcCore.Business.Logic.TablesDescription
+@using ProcCore.JqueryHelp
+@using ProcCore.JqueryHelp.JQGridScript
+@{
+    Schools Tab = new Schools();
+    Department Tabd = new Department();
+}
+@section IncludeScript{
+    @Html.Partial("includeScript_Comm")
+    @Html.Partial("includeScript_Grid")
+}
+@section menu{
+    @Html.Raw(Session["MenuHtmlString"].ToString())
+}
+@{
+    
+    FormatterColumnScript f_col_ids = new FormatterColumnScript();
+    f_col_ids.FunctionName = "$.formatter_MakeEditLinkID";
+    f_col_ids.FunctionString = Html.GridIDColumnCommScriptContext(Url.Action("EditSubDataByID"));
+
+    jqGrid gridsub = Html.jqSubGridStandard(
+    Url.Action(CommWebSetup.acNameMasterSubGridData),
+    Url.Action(CommWebSetup.acNameSubDataDelete),
+    Url.Action("EditSubNewData"), 180, null,
+    new MakeColumnModule() { CN = Tabd.ids.M, CM = { name = Tabd.ids.M, key = true, width = "30px", AssignFormatter= f_col_ids } },
+    new MakeColumnModule() { CN = Tabd.kid.M, CM = { name = Tabd.kid.M, width = "30px",hidden=true } },
+    new MakeColumnModule() { CN = Html.FLang("name_s1"), CM = { name = Tabd.name.M, width = "380px" } },
+    new MakeColumnModule() { CN = Tabd.zip.M, CM = { name = Tabd.zip.M, width = "30px" } },
+    new MakeColumnModule() { CN = Html.FLang(Tabd.sort), CM = { name = Tabd.sort.M, width = "90px"} }
+
+    );
+
+    gridsub.GridModule.postData.Add("s_kid", "id");
+    gridsub.ToScriptHandle();
+    gridsub.NavGridModule.navOption.add = false;
+    gridsub.NavGridModule.navOption.addtext = Resources.Res.Button_Insert;
+    
+    gridsub.NavGridModule.navOption.edit = false;
+    gridsub.NavGridModule.navOption.edittext = Resources.Res.Button_Modify;
+
+    gridsub.NavGridModule.Add.afterShowForm = new funcMethodModule();
+    gridsub.NavGridModule.Add.afterShowForm.funcString = "$.ajax_DetailFormShowAfterHandle(id);";
+    gridsub.NavGridModule.Add.afterShowForm.MakeStyle = funcMethodModule.funcMakeStyle.funcConext;
+
+    gridsub.NavGridModule.Add.closeAfterAdd = true;
+    gridsub.NavGridModule.Add.closeAfterEdit = true;
+
+    //===================================================================================================
+
+    //定義Grid需格式化的欄位
+    FormatterColumnScript f_col_id = new FormatterColumnScript();
+    f_col_id.FunctionName = CommWebSetup.funNameMasterDataFormatterID;
+    f_col_id.FunctionString = Html.GridIDColumnCommScriptContext(CommWebSetup.MasterGridID, Url.Action(CommWebSetup.acNameEditMasterDataByID));
+
+
+    var gridObj = Html.jqGrid_Standard(
+CommWebSetup.MasterGridID,
+(String)ViewBag.Caption,
+ViewData["Page"].ToString(),"",
+Url.Action(CommWebSetup.acNameMasterDataGridUrl),
+Url.Action(CommWebSetup.acNameMasterDataDelete),
+Url.Action(CommWebSetup.acNameEditMasterDataAddNew),
+420, gridsub,
+new MakeColumnModule() { CN = Html.FLang(Tab.id.M), CM = { name = Tab.id.M, width = "30px", align = "center", AssignFormatter = f_col_id } },
+new MakeColumnModule() { CN = Html.FLang(Tab.kid.M), CM = { name = Tab.kid.M, width = "30px" } },
+new MakeColumnModule() { CN = Html.FLang(Tab.name.M), CM = { name = Tab.name.M, width = "220px" } },
+new MakeColumnModule() { CN = Html.FLang(Tab.sort.M), CM = { name = Tab.sort.M, width = "90px" } }
+
+);
+    //設定主Grid的功能Button區
+    gridObj.GridModule.postData = new DataModule();
+    gridObj.GridModule.multiboxonly = true;
+    gridObj.GridModule.multiselect = true;
+
+    gridObj.NavGridModule.navOption.add = false;
+    gridObj.NavGridModule.navOption.edit = false;
+    gridObj.NavGridModule.navOption.del = true;
+    gridObj.GridModule.rowNum = 30;
+
+    //gridObj.NavGridModule.Add.closeAfterAdd = true;
+    //gridObj.NavGridModule.Add.closeAfterEdit = true;
+
+    //gridObj.NavGridModule.Add.afterShowForm = new funcMethodModule();
+    //gridObj.NavGridModule.Add.afterShowForm.funcString = "$.ajax_DetailFormShowAfterHandle();";
+    //gridObj.NavGridModule.Add.afterShowForm.MakeStyle = funcMethodModule.funcMakeStyle.funcConext;
+    
+    gridObj.GridModule.subGrid = true;
+    gridObj.GridModule.ExpandColClick = true;
+
+    gridObj.GridModule.subGridRowExpanded = new funcMethodModule();
+    gridObj.GridModule.subGridRowExpanded.MakeStyle = funcMethodModule.funcMakeStyle.funcConext;
+
+    gridObj.GridModule.subGridRowExpanded.funcString += "var subgrid_table_id;var subgrid_pager_id;subgrid_table_id = pID+ '_t';subgrid_pager_id = pID + '_p';"
+      + "jQuery(\"#\"+pID).html(\"<table id='\"+subgrid_table_id+\"' class='scroll'></table><div id='\" + subgrid_pager_id + \"'></div>\");";
+    gridObj.GridModule.subGridRowExpanded.funcString += gridsub.jqGridScript; 
+}
+
+@Html.Raw(gridObj.ToScriptString())
+
+@Html.AjaxFormSearch(CommWebSetup.eleNameSearchForm, CommWebSetup.MasterGridID, CommWebSetup.eleNameSearchButton, true)
+@Html.OpenDialogPlugin(ViewData["DialogTitle"].ToString(), ViewData["DialogMessage"].ToString())
+<script type="text/javascript">
+    $(document).ready(function () { });
+    (function ($) {
+
+        $.ajax_MasterFormShowAfterHandle = function () {
+            $.EventAjaxHandle({}, 'ajax_GetAddNewID').done(function (data, textStatus, jqXHR) {
+                var jsonobj = jQuery.parseJSON(data);
+                $('#id').val(jsonobj);
+            })
+        }
+
+        $.ajax_DetailFormShowAfterHandle = function (id) {
+            $('#idm').val(id);
+            $.EventAjaxHandle({}, 'ajax_GetAddNewID').done(function (data, textStatus, jqXHR) {
+                var jsonobj = jQuery.parseJSON(data);
+                $('#id').val(jsonobj);
+            })
+        }
+
+        @Html.Raw(f_col_ids.func.ToScriptString())
+
+    })(jQuery);
+</script>

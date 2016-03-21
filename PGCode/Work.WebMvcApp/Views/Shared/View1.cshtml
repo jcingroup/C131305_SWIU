@@ -1,0 +1,266 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+
+    <link rel="Stylesheet" href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.10.3/themes/redmond/jquery-ui.css" type="text/css" />
+    <link href="/_Code/CSS/formStyle.css" rel="stylesheet" />
+    <link href="/_Code/CSS/commStyle.css" rel="stylesheet" />
+
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.10.3/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.10.3/i18n/jquery.ui.datepicker-zh-TW.min.js"></script>
+    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/localization/messages_zh_TW.js"></script>
+    <script src="/_Code/jqScript/jquery.unobtrusive-ajax.js"></script>
+    <script src="/_Code/jqScript/jquery.query-2.1.7.js"></script>
+    <script src="/_Code/jqScript/commfunc.js"></script>
+
+    <link href="/_Code/jqScript/ui.jquery.jqGrid-4.5.2/css/ui.jqgrid.css" rel="stylesheet" />
+
+    <script src="/_Code/jqScript/ui.jquery.jqGrid-4.5.2/js/i18n/grid.locale-tw.js"></script>
+    <script src="/_Code/jqScript/ui.jquery.jqGrid-4.5.2/js/jquery.jqGrid.src.js"></script>
+
+
+    <script type="text/javascript">
+        var gb_approot = '/';
+        var gb_area = 'Sys_Active';
+        var gb_controller = 'Schools';
+        $(document).ready(function () {
+        });
+    </script>
+</head>
+<body>
+    <div id="container">
+        <div id="header"></div>
+        <div id="main">
+            <div id="sidebar">
+
+
+                <ul id="WebMenu">
+                    <li>
+                        <div class="ui-widget-header">最新消息管理</div>
+                        <ul>
+                            <li><a href="/Sys_Example/News/" class="ui-state-hover">最新消息設定</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <div class="ui-widget-header">網頁管理</div>
+                        <ul>
+                            <li><a href="/Sys_Active/PageData/" class="ui-state-hover">網頁編輯設定</a></li>
+                            <li><a href="/Sys_Active/Schools/" class="ui-state-hover">學院網頁編輯</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <div class="ui-widget-header">系統管理</div>
+                        <ul>
+                            <li><a href="/Sys_Base/Users/" class="ui-state-hover">帳號管理</a></li>
+                            <li><a href="/Sys_Base/Unit/" class="ui-state-hover">單位管理</a></li>
+                            <li><a href="/Sys_Base/PowerUnit/" class="ui-state-hover">單位權限</a></li>
+                            <li><a href="/Sys_Base/PowerUsers/" class="ui-state-hover">人員權限</a></li>
+                            <li><a href="/Sys_Base/Users/Password" class="ui-state-hover">變更密碼</a></li>
+                            <li><a href="/Sys_Base/Prog/" class="ui-state-hover">程式設定</a></li>
+                            <li><a href="/Sys_Base/Code/" class="ui-state-hover">分類代碼</a></li>
+                            <li><a href="/Sys_Base/Parm/" class="ui-state-hover">參數設定</a></li>
+                            <li><a href="/Sys_Base/Users/Logout" class="ui-state-hover">登出</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+            </div>
+            <div id="content">
+
+
+
+                <table id="jqMasterGird"></table>
+                <div id="pager"></div>
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        jQuery("#jqMasterGird").jqGrid({
+                            autowidth: true,
+                            caption: "學院網頁編輯",
+                            colModel: [{
+                                name: "id",
+                                width: "30px",
+                                align: "center",
+                                formatter: $.formatter_MakeModifyLinkID
+                            }, {
+                                name: "kid",
+                                width: "30px"
+                            }, {
+                                name: "name",
+                                width: "220px"
+                            }, {
+                                name: "sort",
+                                width: "90px"
+                            }],
+                            colNames: ['代碼', '', '學院', '排序'],
+                            datatype: "json",
+                            ExpandColClick: true,
+                            height: 420,
+                            mtype: "get",
+                            multiboxonly: true,
+                            multiselect: true,
+                            page: 1,
+                            pager: pager,
+                            rowNum: 10,
+                            subGrid: true,
+                            url: "/Sys_Active/Schools/ajax_MasterGridData",
+                            viewrecords: true,
+                            width: "100%",
+                            subGridRowExpanded: function (pID, id) {
+                                var subgrid_table_id; var subgrid_pager_id; subgrid_table_id = pID + '_t'; subgrid_pager_id = pID + '_p'; jQuery("#" + pID).html("<table id='" + subgrid_table_id + "' class='scroll'></table><div id='" + subgrid_pager_id + "'></div>"); jQuery("#" + subgrid_table_id).jqGrid({
+                                    colModel: [{
+                                        key: true,
+                                        name: "ids",
+                                        width: "30px",
+                                        formatter: $.formatter_MakeEditLinkID
+                                    }, {
+                                        name: "kid",
+                                        width: "30px",
+                                        hidden: true
+                                    }, {
+                                        name: "name",
+                                        width: "380px"
+                                    }, {
+                                        name: "zip",
+                                        width: "30px"
+                                    }, {
+                                        name: "sort",
+                                        width: "90px"
+                                    }],
+                                    colNames: ['ids', 'kid', '學系', 'zip', '排序'],
+                                    datatype: "json",
+                                    height: 180,
+                                    mtype: "get",
+                                    multiboxonly: true,
+                                    multiselect: true,
+                                    pager: jQuery("#" + subgrid_pager_id),
+                                    postData: { 's_kid': id },
+                                    url: "/Sys_Active/Schools/ajax_MasterSubGridData",
+                                    width: "100%"
+                                }).navGrid("#" + subgrid_pager_id, {
+                                    add: false,
+                                    addtext: "新增",
+                                    del: true,
+                                    deltext: "刪除",
+                                    deltitle: "刪除資料!",
+                                    edit: false,
+                                    edittext: "編輯",
+                                    refresh: false,
+                                    search: false
+                                },
+                                { url: "/Sys_Active/Schools/EditSubNewData" },
+                                {
+                                    afterShowForm: function (formid) { $.ajax_DetailFormShowAfterHandle(id); },
+                                    closeAfterAdd: true,
+                                    closeAfterEdit: true,
+                                    url: "/Sys_Active/Schools/EditSubNewData"
+                                },
+                                {
+                                    msg: "確定刪除？",
+                                    url: "/Sys_Active/Schools/ajax_SubDataDelete"
+                                }).navButtonAdd('#' + subgrid_pager_id, {
+                                    caption: "新增",
+                                    buttonicon: "ui-icon ui-icon-plusthick",
+                                    onClickButton: function () { },
+                                    position: "last"
+                                }).bindKeys()
+                            }
+                        }).navGrid('#pager', {
+                            add: false,
+                            alerttext: "請選擇要刪除的列。",
+                            del: true,
+                            deltext: "刪除",
+                            deltitle: "刪除資料!",
+                            edit: false,
+                            refresh: true,
+                            search: false
+                        },
+                {},
+                {},
+                {
+                    msg: "確定刪除？",
+                    url: "/Sys_Active/Schools/ajax_MasterDeleteData"
+                }).navButtonAdd('#pager', {
+                    caption: "新增",
+                    buttonicon: "ui-icon ui-icon-plusthick",
+                    onClickButton: function () { var getQuery = $.CollectQuery(); document.location.href = '/Sys_Active/Schools/EditMasterNewData?' + $.pageQuery('jqMasterGird') + (getQuery == '' ? '' : '&' + getQuery); },
+                    position: "last"
+                }).bindKeys()
+                    });
+                    ; (function ($) { $.formatter_MakeModifyLinkID = function (cellValue, options, rowObject) { var getQuery = $.CollectQuery(); var cellHtml = '<a href="/Sys_Active/Schools/EditMasterDataByID?Id=' + jQuery.trim(options.rowId) + '&' + $.pageQuery('jqMasterGird') + '&' + getQuery + '"><div class="ui-state-default ui-corner-all" style="height:24px;width:24px;margin:1px"><span class="ui-icon ui-icon-pencil" style="margin:3px"></span></div></a>'; return cellHtml; }; })(jQuery);
+                </script>
+
+
+                <script type="text/javascript">	$(document).ready(function () {
+
+	    ;
+
+	    
+
+	    $('#btn_Search').click(function () {
+	        ajaxHasDone = $.when.apply($, ajaxRequest);
+	        ajaxHasDone.done(function () {
+	            if ($('#SearchForm').valid()) { $('#SearchForm').submit(); }
+	        });
+	    });
+	    $('#SearchForm').submit(function () { $(this).ajaxSubmit(options); return false; });
+
+	    var options = {
+	        beforeSubmit: function (formData, jqForm, options) { var queryString = $.param(formData); return true; },
+	        success: function (jsonobj, statusText, xhr, $form) {
+	            var GetGridMaster = jQuery('#jqMasterGird')[0];
+	            GetGridMaster.addJSONData(jsonobj);
+	            //jQuery('#jqMasterGird').editGridRow( 24 );
+	            if (jsonobj.records == 0) { jsonobj.message = '查詢無任何資料。'; $.UiMessage(jsonobj); GetGridMaster = null; jsonobj = null }
+	        },
+	        dataType: "json"
+	    };
+
+	    function AjaxFormBeforeSubmit(formData, jqForm, options) { var queryString = $.param(formData); return true; };
+
+	    function AjaxFormSuccess(jsonobj, statusText, xhr, $form) {
+	        var GetGridMaster = jQuery('#jqMasterGird')[0];
+	        GetGridMaster.addJSONData(jsonobj);
+	        //jQuery('#jqMasterGird').editGridRow( 24 );
+	        if (jsonobj.records == 0) { jsonobj.message = '查詢無任何資料。'; $.UiMessage(jsonobj); GetGridMaster = null; jsonobj = null }
+	    };
+
+	    ;
+
+	    ;
+	});
+                </script>
+
+                <script type="text/javascript">
+                    $(document).ready(function () { });
+                    (function ($) {
+
+                        $.ajax_MasterFormShowAfterHandle = function () {
+                            $.EventAjaxHandle({}, 'ajax_GetAddNewID').done(function (data, textStatus, jqXHR) {
+                                var jsonobj = jQuery.parseJSON(data);
+                                $('#id').val(jsonobj);
+                            })
+                        }
+
+                        $.ajax_DetailFormShowAfterHandle = function (id) {
+                            $('#idm').val(id);
+                            $.EventAjaxHandle({}, 'ajax_GetAddNewID').done(function (data, textStatus, jqXHR) {
+                                var jsonobj = jQuery.parseJSON(data);
+                                $('#id').val(jsonobj);
+                            })
+                        }
+
+                        $.formatter_MakeEditLinkID = function (cellValue, options, rowObject) { var getQuery = $.CollectQuery(); var cellHtml = '<a href="/Sys_Active/Schools/EditSubDataByID?Id=' + jQuery.trim(options.rowId) + '"><div class="ui-state-default ui-corner-all" style="height:24px;width:24px;margin:1px"><span class="ui-icon ui-icon-pencil" style="margin:3px"></span></div></a>'; return cellHtml; };
+
+                    })(jQuery);
+                </script>
+            </div>
+        </div>
+    </div>
+    <div id="dialog" title="" style="display: none; z-index: 254"></div>
+</body>
+</html>

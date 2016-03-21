@@ -1,0 +1,40 @@
+﻿@{
+    ProcCore.Business.Logic.m_Schools[] mds = (ProcCore.Business.Logic.m_Schools[])ViewData["Sibar"];
+    var s = Request.QueryString["schools"];
+    var d = Request.QueryString["department"];    
+}
+<div id="sidebar">
+    <form class="find" method="get" action="@Url.Action("SchoolsInfo", "Index")">
+        <h4>PROGRAM FINDER</h4>
+
+        <label>Zip Code</label>
+        <input type="text" name="zip" class="input">
+
+        <select name="schools" id="schools">
+            @foreach (var md in mds)
+            {
+                <option value="@md.id">@md.name</option>
+            }
+        </select>
+        <select name="department" id="department"></select>
+        <input type="submit" value="Start" class="btn">
+    </form>
+
+    <dl class="school">
+        <dt>School</dt>
+        @foreach (var md in mds)
+        {
+            if (md.dempartments.Count() > 0)
+            {
+            <dd><a href="~/Index/SchoolsInfo/?department=@md.dempartments.FirstOrDefault().ids">@md.name</a></dd>
+            }
+        }
+    </dl>
+
+</div>
+<!-- sidebar //-->
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#schools').selectajax({ relation_element: $('#department'), data_url: '@Url.Action("ajax_GetDepartmentList")' }).val(@s);
+    });
+</script>

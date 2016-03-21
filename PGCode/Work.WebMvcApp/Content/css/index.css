@@ -1,0 +1,252 @@
+﻿@import "base/basic.css";
+@import "base/layout.css";
+
+@charset "utf-8";
+
+a {
+    color:#999;
+    }
+a:hover {
+    color: #00A99D;
+    }
+    
+.more {
+    float:right;
+    margin:-10px 10px 0 0;
+    }
+    
+hr {
+    margin:42px 0 14px 0;
+    }
+
+h3 {
+    text-indent:-9999px;
+    height:37px;
+    margin:10px 0 5px 0;
+    }
+h4 {
+    font-style: normal;
+    letter-spacing:-1px;
+    }
+
+#content {
+    border-right:1px solid #F2F2F2;
+    width:596px;
+    }
+#content h3 {
+    background: url('../images/index/title1.gif') no-repeat 0 0;
+    }
+#content cite {
+    background: url('../images/index/pic.jpg') no-repeat 0 0;
+    display:block;
+    text-indent:-9999px;
+    height:149px;
+    margin:0;
+    }
+
+.school {
+    width:228px;
+    margin:0 10px 0 0;
+    }
+.reward {
+    width:290px;
+    }
+
+#sidebar {
+    width:370px;
+    }
+#sidebar h3.t1 {
+    background: url('../images/index/title2.gif') no-repeat 0 0;
+    }
+#sidebar h3.t2 {
+    background: url('../images/index/title3.gif') no-repeat 0 0;
+    }
+#sidebar ol {
+    margin:20px 0;
+    }
+#sidebar ol li {
+    clear:both;
+    margin:10px 0;
+    }
+#sidebar ol img {
+    margin-right:0;
+    }
+#sidebar ol a {
+    color:#B3B3B3;
+    line-height:150%;
+    
+    display:block;
+    width:234px; height:80px;
+    margin-left:132px;
+    }
+#sidebar ol a:hover {
+    color:#00A99D;
+    }
+#sidebar ol em { 
+    display:block;
+    color:#F7931E;
+    font-size:1.5em;
+    height:24px;
+    }
+
+#sidebar ul li {
+    background: url('../images/icon_arrow.gif') no-repeat 0 8px;
+    font-size:1.1em;
+    line-height:150%;
+    padding:4px 0 4px 16px;
+    }
+
+#slider {
+    background: #fff url('../../images/loading.gif') no-repeat 50% 50%;
+    border:3px solid #E6E6E6;
+    width:100%; height:320px;
+    position:relative;
+    overflow: hidden;
+    }
+#slider img {
+    position:absolute;
+    top:0px; left:0px;
+    max-width: none;
+    display:none;
+    }
+#slider a {
+    border:0;
+    display:block;
+    }
+.nivo-main-image {
+    display: block !important;
+    position: relative !important; 
+    width: 100% !important;
+    }
+
+/* If an image is wrapped in a link */
+#slider a.nivo-imageLink {
+    background:white;
+    display:none;
+    
+    width:100%; height:100%;
+    position:absolute;
+    top:0px; left:0px;
+    z-index:6;
+    
+    filter:alpha(opacity=0); 
+    opacity:0;
+    }
+/* The slices and boxes in the Slider */
+.nivo-slice {
+    display:block;
+    height:100%;
+    position:absolute;
+    top:0;
+    z-index:5;
+    }
+.nivo-box {
+    display:block;
+    position:absolute;
+    z-index:5;
+    overflow:hidden;
+    }
+.nivo-box img { display:block; }
+
+/* Caption styles */
+.nivo-caption {
+    background:#000;
+    color:#fff;
+    font-family: Helvetica, Arial, sans-serif;
+    display: none;
+    overflow: hidden;
+    
+    padding: 5px 10px;
+    width:100%;
+    
+    position:absolute;
+    left:0px;bottom:0px;
+    z-index:8;
+    
+    opacity: 0.8;
+    -moz-opacity: 0.8;
+    filter:alpha(opacity=8);
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    box-sizing: border-box;         /* Opera/IE 8+ */
+    }
+.nivo-caption p {
+    padding:5px;
+    margin:0;
+    }
+.nivo-caption a {
+    display:inline !important;
+    color:#fff;
+    border-bottom:1px dotted #fff;
+    }
+.nivo-html-caption {
+    display:none;
+    }
+
+/* Direction nav styles (e.g. Next & Prev) */
+.nivo-directionNav a {
+    background-attachment: fixed;
+    background:url('../../images/arrows.png') no-repeat;
+    border:0;
+    text-indent:-9999px;
+    cursor:pointer;
+    display:block;
+    
+    width:30px; height:30px;
+    
+    position:absolute;
+    top:45%;
+    z-index:9;
+    
+    opacity: 0;
+    -webkit-transition: all 200ms ease-in-out;
+    -moz-transition: all 200ms ease-in-out;
+    -o-transition: all 200ms ease-in-out;
+    transition: all 200ms ease-in-out;
+    }
+#slider:hover .nivo-directionNav a {
+    opacity: 1;
+    }
+a.nivo-nextNav {
+    background-position:-30px 0;
+    right:15px;
+    }
+a.nivo-prevNav {
+    left:15pxpx;
+    }
+
+/* Control nav styles (e.g. 1,2,3...) */
+.nivo-controlNav {
+    display:none;
+    text-align:center;
+    padding: 15px 0;
+    }
+.nivo-controlNav a {
+    background:url('../../images/bullets.png') no-repeat;
+    border:0;
+    text-indent:-9999px;
+    cursor:pointer;
+    display:inline-block;
+    
+    width:22px; height:22px;
+    margin: 0 2px;
+    }
+.nivo-controlNav a.active {
+    font-weight:bold;
+    background-position:0 -22px;
+    }
+
+.nivo-controlNav.nivo-thumbs-enabled {
+    width: 100%;
+    }
+.nivo-controlNav.nivo-thumbs-enabled a {
+    width: auto;
+    height: auto;
+    background: none;
+    margin-bottom: 5px;
+    }
+.nivo-controlNav.nivo-thumbs-enabled img {
+    display: block;
+    width: 120px;
+    height: auto;
+    }

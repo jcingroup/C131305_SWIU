@@ -1,0 +1,25 @@
+﻿@{
+    ViewBag.Title = "Ebook";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+@section styles {
+    <link rel="stylesheet" href="~/Content/css/page.css">
+}
+
+<ul class="breadCrumb">
+    <li><a href="~/index">HOME</a></li>
+    <li>電子書</li>
+</ul>
+
+@RenderPage("~/Views/Shared/sidebar.cshtml")
+
+<div id="content">
+    
+    <h3>電子書</h3>
+    <ul>
+         <li>TQ-智慧革命 <a class="dl" href="~/Content/images/Ebook/SWIU-TQ-Tradition-9906_tw.pdf">Download</a></li>
+         <li>產品經理制度的know-why與know-how <a class="dl" href="~/Content/images/Ebook/know-why&know-how_tw.pdf">Download</a></li>
+    </ul>
+    
+</div><!-- content //-->

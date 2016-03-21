@@ -1,0 +1,270 @@
+@import "base/basic.css";
+@import "base/layout.css";
+
+@charset "utf-8";
+
+
+cite {
+    text-indent:-9999px;
+    }
+
+#content ul {
+    margin:0 20px 15px 0;
+    }
+#content ul li {
+    background: url('../images/icon_arrow.gif') no-repeat 0 5px;
+    color:#998675;
+    padding-left:14px;
+    margin:7px 0;
+    }
+#content img {
+    max-width: 100%;
+    }
+
+.col2 {
+    float:left;
+    width:320px;
+    }
+#content .title {
+    background:none;
+    color:#751721;
+    font: 1.4em/100% Tahoma, Geneva, sans-serif;
+    padding:0;
+    }
+
+.picList {
+    overflow:hidden;
+    }
+.picList li {
+    float:left;
+    text-align:center;
+    width:160px;
+    }
+.picList em {
+    display:block;
+    }
+
+.subNav {
+    margin-bottom:15px;
+    }
+.data { width:100%; }
+.data th,
+.data td {
+ padding:5px;
+ }
+.data th {
+ background:#731021;
+ color:#fff;
+ }
+.data td {
+ border-bottom:1px solid #eee;
+ }
+
+
+/*-- 關於我們 --*/
+.page1 cite {
+    background: url('../images/page1/cite.jpg') no-repeat 0 0;
+    height:220px;
+    }
+    
+
+/*-- 入學條件 --*/
+.page8 cite {
+    background: url('../images/page8/cite.jpg') no-repeat 0 0;
+    height:170px;
+    }
+
+/*-- 最新消息 -- */
+ul.news li {
+    overflow:hidden;
+    padding-bottom:10px;
+    }
+ul.news em {
+    font-size:.8em;
+    display:block;
+    float:left; clear:left;
+    }
+ul.news a {
+    display:block;
+    margin-left:85px;
+    }
+ul.news span {
+    float:left;
+    margin-left:85px;
+    }
+
+.News .textR {
+    color:#F7931E;
+    margin-right:20px;
+    }
+.News .textR a {
+    background:#0084B4;
+    color:#fff;
+    font-size:0.8em;
+    display:inline-block;
+    padding:2px 7px;
+    margin-left:5px;
+    }
+.News .textR a:hover {
+    background:#F7931E;
+    }
+.News em.textR {
+    display:block;
+    margin-top:-10px;
+    }
+.news_content {
+    border-top:1px solid #f2f2f2;
+    border-bottom:1px solid #f2f2f2;
+    padding:20px 20px 20px 0;
+    }
+
+/*-- 僱員 -- */
+.page5 .floatR {
+    width:160px;
+    }
+.floatR em {
+    display:block;
+    }
+
+
+/*-- 簡章文件 -- */
+.dl {
+    background:#FBB03B;
+    color:#fff;
+    display:inline-block;
+    padding:0 2px;
+    margin-left:10px;
+    }
+.dl:hover {
+    background:#0081B4;
+    }
+
+/*-- 傑出校友 -- */
+.page3 ol li {
+    width:230px;
+    }
+
+/*-- 問與答 -- */
+.faq dt {
+    color:#751721;
+    font: italic normal 1.7em/100% Tahoma, Geneva, sans-serif;
+    margin:20px 20px 10px 0;
+    }
+.faq dd {
+    border-top:1px dotted #ccc;
+    padding-top:10px;
+    margin:0 20px 40px 0;
+    }
+
+/*-- 線上報名 -- */
+.page11 #content h3+p {
+  margin-bottom:20px;
+  padding-bottom:0;
+  border:0;
+  }
+.page11 #content p {
+  min-height:20px;
+  padding-bottom:15px;
+  border-bottom:1px solid #ddd;
+  clear:both;
+  }
+.page11 #content p.center {
+  padding-bottom:0;
+  border:0;
+  }
+.page11 fieldset label {
+  float:left;
+  width:115px;
+  margin-top:2px;
+  color:#00A99D;
+  font-size:1.2em;
+  }
+.page11 fieldset input,
+.page11 fieldset select,
+.page11 fieldset textarea {
+  width:250px;
+  border:1px solid #c7c7c7;
+  padding:2px 5px;
+  border-radius: 6px;
+  box-sizing: border-box;
+  }
+.page11 fieldset select {
+  display:block;
+  width:auto; min-width:250px;
+  margin-left:115px;
+  }
+.page11 fieldset textarea {
+  width:80%;
+  height:150px;
+  }
+.page11 #content .btn {
+  width:auto; min-width:66px;
+  height:auto;
+  margin:0 10px;
+  padding:5px;
+  color:#5A4D3E;
+  background:#D4C8BD;
+  transition:0.5s;
+  }
+.page11 #content .btn:hover {
+  color:#fff;
+  background:#751721;
+  }
+.page11 #content p em {
+  float:left;
+  width:115px;
+  color:#00A99D;
+  font-size:1.2em;
+  }
+.page11 #content p span {
+  display:block;
+  width:80%;
+  margin-left:115px;
+  }
+
+
+/*-- 頁籤 -- */
+.pager {
+  margin:25px auto;
+  text-align: center;
+	 *zoom:1;
+  }
+.pager li {
+  font-size:0.85em;
+  text-indent:0;
+  margin:0 2px;
+  
+  display: inline-block;
+	 *display:inline;
+	 *zoom:1;
+  }
+.pager a {
+  border:1px solid #eaeaea;
+  color:#999;
+  font-size:0.85em;
+  vertical-align:middle;
+  
+  display:block;
+  padding:2px 5px;
+  }
+.pager a:hover {
+  background:#F9DC57;
+  border:1px solid #f7f7f7;
+  color:#4d4d4d
+  }
+.pager li.current {
+  background:#f2f2f2;
+  padding:2px 6px;
+  }
+.pager li.prev a,
+.pager li.next a {
+  background-attachment:fixed;
+  border:none;  
+  text-indent:-2000px; 
+  width:15px; height:15px;
+  padding:0;
+  }
+.pager li.prev a { background:url('../images/pager.gif') no-repeat -72px -2px; }
+.pager li.next a { background:url('../images/pager.gif') no-repeat -97px -2px; }
+.pager li.prev a:hover { background:url('../images/pager.gif') no-repeat -72px -30px; }
+.pager li.next a:hover { background:url('../images/pager.gif') no-repeat -97px -30px; }

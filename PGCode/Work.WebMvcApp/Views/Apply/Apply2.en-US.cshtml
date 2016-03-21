@@ -1,0 +1,73 @@
+﻿@model DotWeb.Apply
+@{
+    ViewBag.Title = "Application";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+@section styles {
+    <link rel="stylesheet" href="~/Content/css/page.css">
+}
+
+<ul class="breadCrumb">
+    <li><a href="~/index">HOME</a></li>
+    <li>Application</li>
+</ul>
+
+@RenderPage("~/Views/Shared/sidebar.cshtml")
+
+<div id="content">
+    
+    <h3>Application</h3>
+    
+    <p>Please check the following information before clicking the submit button.</p>
+    
+    <p>
+      <em>Name:</em> @Model.name
+      
+    </p>
+    <p>
+      <em>Tel:</em> @Model.tel
+    </p>
+    <p>
+      <em>E-mail:</em> @Model.email
+    </p>
+    <p>
+      <em>Program:</em>
+      <span>@Model.ex_school<br>@Model.ex_department</span>
+    </p>
+    <p>
+      <em>Country:</em>
+      @Model.country
+    </p>
+    <p>
+      <em>Memo:</em>
+      <span>@Model.memo</span>
+    </p>
+      
+    <p class="center">
+      <input class="btn" type="button" value="Submit" id="sendmail" /><!--資料送出後,彈出寄送成功之類的對話框,畫面跳回首頁-->
+      <input class="btn" type="button" value="Edit" id="btn_return" />
+    </p>
+</div><!-- content //-->
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#btn_return').click(function () {
+            //document.location.href = 'Apply';
+            //event.preventDefault();
+            history.back(1);
+        });
+
+        $('#sendmail').click(function () {
+            $.post('ajax_sendmail', {}).done(function (data, textStatus, jqXHR) {
+                var r = jQuery.parseJSON(data);
+                if (r) {
+                    alert('信件已寄出!');
+                    document.location.href = '@Url.Content("~")';
+                } else {
+                    alert('信件寄送失敗!')
+                }
+            });
+        });
+
+    });
+</script>

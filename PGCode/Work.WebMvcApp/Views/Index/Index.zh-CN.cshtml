@@ -1,0 +1,95 @@
+﻿@{
+    ProcCore.Business.Logic.m_Schools[] mds = (ProcCore.Business.Logic.m_Schools[])ViewData["Sibar"];
+}
+@model DotWeb.FrontWeb
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+@section styles {
+    @* 多语共用css及script放在同目录的commScript.cshtml *@
+    @Html.Partial("commScript")
+}
+
+<div id="banner">
+    <div id="slider">
+        <img src="~/Content/images/index/banner.jpg" data-thumb="~/Content/images/index/banner.jpg">
+        <img src="~/Content/images/index/banner2.jpg" data-thumb="~/Content/images/index/banner2.jpg">
+        <img src="~/Content/images/index/banner3.jpg" data-thumb="~/Content/images/index/banner3.jpg">
+    </div><!-- slider //-->
+</div><!-- banner //-->
+
+<div id="sidebar">
+    <h3 class="t1">最新消息</h3>
+    <ol>
+        @foreach (var m in Model.news)
+        {
+            <li>
+                <img class="floatL" src="@Html.ImgSrc("Sys_Active", "NewsData", m.id, "DefaultKind", 120, "NoPic.JPG")">
+                <a href="~/News/News"><em>@m.set_date.ToString("MMMM dd")</em> @m.title ....</a>
+            </li>
+        }
+        <!--
+        <li><img class="floatL" src="~/Content/images/index/news1.jpg">
+            <a href="~/News/News"><em>April 20</em>LOREM IPSUM DOLOR SIT AMET, CONSECTETUER....</a>
+        </li>
+        <li><img class="floatL" src="~/Content/images/index/news2.jpg">
+            <a href="~/News/News"><em>April 20</em>ADIPISCING ELIT, SED DIAM NONUMMY NIBH...</a>
+        </li>
+        <li><img class="floatL" src="~/Content/images/index/news3.jpg">
+            <a href="~/News/News"><em>April 20</em>EUISMOD TINCIDUNT UT LAOREET DOLORE MAGNA...</a>
+        </li>
+        <li><img class="floatL" src="~/Content/images/index/news4.jpg">
+            <a href="~/News/News"><em>April 20</em>EUISMOD TINCIDUNT UT LAOREET DOLORE MAGNA...</a>
+        </li>
+        -->
+    </ol>
+    
+    <h3 class="t2">Alumni</h3>
+    <ul>
+        <li><a href="~/Index/PageInfo/?kid=3">石家庄经济学院院长 郝东恒</a></li>
+        <li><a href="~/Index/PageInfo/?kid=3">上海市经济管理干部学院副教授 高启中</a></li>
+        <li><a href="~/Index/PageInfo/?kid=3">上海龙睦商务酒店营销总监 马维全</a></li>
+        <li><a href="~/Index/PageInfo/?kid=3">无锡高新技术产业协会副理事长 刘骁</a></li>
+        <li><a href="~/Index/PageInfo/?kid=3">南京博爱人力资源有限公司总经理 周辉</a></li>
+        <li><a href="~/Index/PageInfo/?kid=3">南京市外事服务公司出国服务部项目经理 吴云飞</a></li>
+        <li><a href="~/Index/PageInfo/?kid=3">南京市人民政府副秘书长李恕</a></li>
+        <li><a href="~/Index/PageInfo/?kid=3">南京民间组织发展促进会秘书长 周凤娣</a></li>
+        <li><a href="~/Index/PageInfo/?kid=3">江南时报人民日报社主管王承洁</a></li>
+    </ul>
+</div><!-- sidebar //-->
+
+<div id="content">
+    <h3>Discover Our University!</h3>
+    <cite>“Won the U.S. Department of Education recognized university ranked 807”</cite>
+    
+    <h4>荣获美国教育部认可大学排名807名</h4>
+    <p><strong>SWIU</strong>是一所兼具专业训练与科技应用的现代化大学。本校经国际教育总署评鉴委员会 (International Education Ministry Accreditation Association, IEMAA)，以及<strong>中国政府认可</strong>，暨美国另类医学学会(American Alternative Medical Association, AAMA) 评鉴通过，并为美国远距教育协会(The United States Distance Learning Association, USDLA) 和开放暨远距教育国际委员会 (International Council for Open and Distance Education , ICDE) 资深会员；本校也是北美顺势医学协会 (North American Society of Homeopaths, NASH)丶美国音乐治疗学会 (American Music Therapy Association, AMTA) 及国际催眠师协会 (National Guild of Hypnotists, NGH) 认可会员及受其推崇的优秀学府；上述机构均为世界权威专业评鉴大学院校的非营利性独立机构。本校并被美国最权威的教育杂志 Bears' Guide to Earning Degrees by Distance Learning 列入最优良学校查询目录中。</p>
+    <a class="more" href="~/Index/PageInfo/?kid=1">More Information</a>
+    
+    <hr>
+    
+    <dl class="school">
+        <dt>School</dt>
+        @foreach (var md in mds)
+        {
+            if (md.dempartments.Count() > 0)
+            {
+            <dd><a href="~/Index/SchoolsInfo/?department=@md.dempartments.FirstOrDefault().ids">@md.name</a></dd>
+            }
+        }
+    </dl>
+    
+    <dl class="reward">
+        <dt>Reward</dt>
+        <dd><a href="http://www.educause.edu/Community/MemDir/SouthwestInternationalUniversity/199823" target="_blank">EDUCAUSE,美国教育部认可之大学</a></dd>
+        <dd><a href="http://www.iemaa.webs.com/index.html" target="_blank">IEMAA,国际教育总署评鉴委员会</a></dd>
+        <dd><a href="http://www.joinaama.com/" target="_blank">AAMA,美国另类医学学会</a></dd>
+        <dd><a href="http://www.usdla.org/" target="_blank">USDLA,美国远距教育协会</a></dd>
+        <dd><a href="http://www.icde.org/" target="_blank">ICDE,开放暨远距教育国际委员会</a></dd>
+        <dd><a href="http://www.homeopathy.org/" target="_blank">NASH,北美顺势医学协会</a></dd>
+        <dd><a href="http://www.musictherapy.org/" target="_blank">AMTA,美国音乐治疗学会</a></dd>
+        <dd><a href="http://www.ngh.net/" target="_blank">NGH,国际催眠师协会</a></dd>
+        <dd><a href="~/Index/PageInfo/?kid=6">Bears' Guide to Earning Degrees by Distance Learning</a></dd>
+    </dl>
+</div><!-- content //-->

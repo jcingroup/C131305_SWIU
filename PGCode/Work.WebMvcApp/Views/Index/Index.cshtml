@@ -1,0 +1,96 @@
+﻿@{
+    ProcCore.Business.Logic.m_Schools[] mds = (ProcCore.Business.Logic.m_Schools[])ViewData["Sibar"];
+}
+@model DotWeb.FrontWeb
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+@section styles {
+    @* 多語共用css及script放在同目錄的commScript.cshtml *@
+    @Html.Partial("commScript")
+}
+
+<div id="banner">
+    <div id="slider">
+        <img src="~/Content/images/index/banner.jpg" data-thumb="~/Content/images/index/banner.jpg">
+        <img src="~/Content/images/index/banner2.jpg" data-thumb="~/Content/images/index/banner2.jpg">
+        <img src="~/Content/images/index/banner3.jpg" data-thumb="~/Content/images/index/banner3.jpg">
+    </div><!-- slider //-->
+</div><!-- banner //-->
+
+<div id="sidebar">
+    <h3 class="t1">最新消息</h3>
+    <ol>
+        @foreach (var m in Model.news)
+        {
+            <li>
+                <img class="floatL" src="@Html.ImgSrc("Sys_Active", "NewsData", m.id, "DefaultKind", 120, "NoPic.JPG")">
+                <a href="~/News/News"><em>@m.set_date.ToString("MMMM dd")</em> @m.title ....</a>
+            </li>
+        }
+    </ol>
+    
+    <h3 class="t2">Alumni</h3>
+    <ul>
+        <li><a href="~/Index/PageInfo/?kid=3">骨科主治醫生 張文開</a></li>
+        <li><a href="~/Index/PageInfo/?kid=3">高雄海洋大學校長  魏兆昕(HDBA)</a></li>
+        <li><a href="~/Index/PageInfo/?kid=3">省(前)府發言人/親民黨秘書長 秦金生</a></li>
+        <li><a href="~/Index/PageInfo/?kid=3">台鹽董事長  洪璽曜(MBA/DBA)</a></li>
+        <li><a href="~/Index/PageInfo/?kid=3">台灣區眼鏡工業同業公會理事長何語</a></li>
+        <li><a href="~/Index/PageInfo/?kid=3">台灣省漁會理事長 / 宜蘭縣立委 鄭美蘭(MPA)</a></li>
+        <li><a href="~/Index/PageInfo/?kid=3">天成集團董事長 廖榮清</a></li>
+        <li><a href="~/Index/PageInfo/?kid=3">高雄市議員 楊敏郎(MBA)</a></li>
+        <li><a href="~/Index/PageInfo/?kid=3">台灣藝術大學教授 洪孟啟</a></li>
+        <li><a href="~/Index/PageInfo/?kid=3">台中市副議長 陳天汶(MPA)</a></li>
+    </ul>
+</div><!-- sidebar //-->
+
+<div id="content">
+    <h3>Discover Our University!</h3>
+    <cite>“Won the U.S. Department of Education recognized university ranked 807”</cite>
+    
+    <h4>榮獲美國教育部認可大學排名807名</h4>
+    <p><strong>SWIU</strong>是一所兼具專業訓練與科技應用的現代化大學。本校經國際教育總署評鑒委員會 (International Education Ministry Accreditation Association, IEMAA)，以及中國政府認可，暨美國另類醫學學會(American Alternative Medical Association, AAMA) 評鑒通過，並為美國遠距教育協會(The United States Distance Learning Association, USDLA) 和開放暨遠距教育國際委員會 (International Council for Open and Distance Education , ICDE) 資深會員；本校也是北美順勢醫學協會 (North American Society of Homeopaths, NASH)、美國音樂治療學會 (American Music Therapy Association, AMTA) 及國際催眠師協會 (National Guild of Hypnotists, NGH) 認可會員及受其推崇的優秀學府；上述機構均為世界權威專業評鑒大學院校的非營利性獨立機構。本校並被美國最權威的教育雜誌 Bears' Guide to Earning Degrees by Distance Learning 列入最優良學校查詢目錄中。</p>
+    <a class="more" href="~/Index/PageInfo/?kid=1">More Information</a>
+    
+    <hr>
+    
+    <dl class="school">
+        <dt>School</dt>
+        @foreach (var md in mds)
+        {
+            if (md.dempartments.Count() > 0)
+            {
+            <dd><a href="~/Index/SchoolsInfo/?department=@md.dempartments.FirstOrDefault().ids">@md.name</a></dd>
+            }
+        }
+        <!--dd><a href="~/School/School">Business Administration & Management</a></dd>
+        <dd><a href="~/School/School">Modern Languages &Cultures</a></dd>
+        <dd><a href="~/School/School">Education</a></dd>
+        <dd><a href="~/School/School">Traditional Medicine</a></dd>
+        <dd><a href="~/School/School">Engineering</a></dd>
+        <dd><a href="~/School/School">Entertainment & Tourism</a></dd>
+        <dd><a href="~/School/School">Law</a></dd>
+        <dd><a href="~/School/School">Mass Communication & Journalism</a></dd>
+        <dd><a href="~/School/School">Music</a></dd>
+        <dd><a href="~/School/School">Nursing</a></dd>
+        <dd><a href="~/School/School">Public Affairs & Administration</a></dd>
+        <dd><a href="~/School/School">Sociology & Behavior Science</a></dd>
+        <dd><a href="~/School/School">Theology & Religion</a></dd>
+        <dd><a href="~/School/School">TQ LAB</a></dd-->
+    </dl>
+    
+    <dl class="reward">
+        <dt>Reward</dt>
+        <dd><a href="http://www.educause.edu/Community/MemDir/SouthwestInternationalUniversity/199823" target="_blank">EDUCAUSE,美國教育部認可之大學</a></dd>
+        <dd><a href="http://www.iemaa.webs.com/index.html" target="_blank">IEMAA,國際教育總署評鑑委員會</a></dd>
+        <dd><a href="http://www.joinaama.com/" target="_blank">AAMA,美國另類醫學學會</a></dd>
+        <dd><a href="http://www.usdla.org/" target="_blank">USDLA,美國遠距教育協會</a></dd>
+        <dd><a href="http://www.icde.org/" target="_blank">ICDE,開放暨遠距教育國際委員會</a></dd>
+        <dd><a href="http://www.homeopathy.org/" target="_blank">NASH,北美順勢醫學協會</a></dd>
+        <dd><a href="http://www.musictherapy.org/" target="_blank">AMTA,美國音樂治療學會</a></dd>
+        <dd><a href="http://www.ngh.net/" target="_blank">NGH,國際催眠師協會</a></dd>
+        <dd><a href="~/Index/PageInfo/?kid=6">Bears' Guide to Earning Degrees by Distance Learning</a></dd>
+    </dl>
+</div><!-- content //-->

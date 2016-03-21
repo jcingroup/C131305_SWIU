@@ -1,0 +1,37 @@
+﻿@model ProcCore.Business.Logic.m_消息D
+@{
+    ViewBag.Title = "News";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+@section styles {
+    <link rel="stylesheet" href="~/Content/css/page.css">
+}
+
+<ul class="breadCrumb">
+    <li><a href="~/index">HOME</a></li>
+    <li>@Resources.ResWeb.News</li>
+</ul>
+
+@RenderPage("~/Views/Shared/sidebar.cshtml")
+
+<div id="content">
+    <h3>@Resources.ResWeb.News</h3>
+    <h4>@Model.title</h4>
+    <em class="textR">@Model.set_date.ToString("yyyy.MM.dd")</em>
+    <div class="news_content">
+        @Html.Raw(Model.context)
+
+        @{
+            String[] ImageFiles = Html.ImagesAppendInfo("Sys_Active", "Message", Model.id, "DefaultKind");
+        }
+        @foreach (String ImageFile in ImageFiles)
+        { 
+            <img src="@ImageFile" />
+        }
+
+    </div><!-- news_content //-->
+    <div class="textR">
+    <a href="~/News">BACK</a> <a href="#header">▲TOP</a>
+    </div><!-- textR //-->
+</div><!-- content //-->

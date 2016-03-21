@@ -1,0 +1,74 @@
+﻿@model ProcCore.Business.Logic.q_PageData
+
+@using ProcCore.Business.Logic.TablesDescription
+@using ProcCore.JqueryHelp
+@using ProcCore.JqueryHelp.JQGridScript
+@using ProcCore.JqueryHelp.FormvValidate;
+@using ProcCore.JqueryHelp.CustomButton;
+
+
+@section IncludeScript{
+    @Html.Partial("includeScript_Comm")
+    @Html.Partial("includeScript_Grid")
+}
+@section menu{
+    @Html.Raw(Session["MenuHtmlString"].ToString())
+}
+@{
+    PageData Tab = new PageData();
+
+    //定義Grid需格式化的欄位
+    FormatterColumnScript f_col_id = new FormatterColumnScript();
+    f_col_id.FunctionName = CommWebSetup.funNameMasterDataFormatterID;
+    f_col_id.FunctionString = Html.GridIDColumnCommScriptContext(CommWebSetup.MasterGridID, Url.Action(CommWebSetup.acNameEditMasterDataByID));
+
+    jqGrid gridobj = Html.jqGrid_Standard(
+    CommWebSetup.MasterGridID,
+    (String)ViewBag.Caption,
+    ViewData["Page"].ToString(),
+    ViewData["AppendQuertString"].ToString(),
+    Url.Action(CommWebSetup.acNameMasterDataGridUrl),
+    Url.Action(CommWebSetup.acNameMasterDataDelete),
+    Url.Action(CommWebSetup.acNameEditMasterDataAddNew),
+    640, 30, null,
+    new MakeColumnModule() { CN = Resources.Res.ColModify, CM = { name = Tab.id.M, key = true, width = "45px", AssignFormatter = f_col_id } },
+    new MakeColumnModule() { CN = Html.FLang(Tab.pagename.M), CM = { name = Tab.pagename.M, width = "280px" } },
+        new MakeColumnModule() { CN = Html.FLang(Tab.kid.M), CM = { name = Tab.kid.M, width = "30px" } }
+    );
+
+    gridobj.GridModule.multiselect = false;
+    gridobj.NavGridModule.navOption.add = false;
+    gridobj.NavGridModule.navOption.del = false;
+
+    gridobj.ToScriptHandle();
+}
+
+@Html.Raw(gridobj.jqGridHtml)
+@Html.OpenDialogPlugin(ViewData["DialogTitle"].ToString(), ViewData["DialogMessage"].ToString())
+@{
+    FormValidateSetup val_frm_a = new FormValidateSetup(new jqSelector() { IdName = CommWebSetup.eleNameSearchForm });
+    //
+    jqSelector jqId_btn_sch = new jqSelector() { IdName = CommWebSetup.eleNameSearchButton };
+    //
+    jqButton btn_sch_fmwk = new jqButton(jqId_btn_sch);
+    btn_sch_fmwk.options.icons.primary = FrameworkIcons.ui_icon_search;
+    //
+    jqElementEvent btn_sch_evt_clk = new jqElementEvent(jqId_btn_sch);
+    btn_sch_evt_clk.events.Add(new jqElementEvent.jqEvents()
+    {
+        htmlElementEvent = HtmlObjectEvent.click,
+        funcString = @"
+$('#" + CommWebSetup.MasterGridID + @"').setGridParam({postData: null});
+$('#" + CommWebSetup.MasterGridID + @"').trigger('reloadGrid');"
+    });
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+        @Html.Raw(gridobj.jqGridScript)
+        @Html.Raw(btn_sch_fmwk.ToScriptString())
+        @Html.Raw(btn_sch_evt_clk.ToScriptString())
+    });
+    (function ($) {
+        @Html.Raw(gridobj.jqFormatterScript)
+    })(jQuery);
+</script>

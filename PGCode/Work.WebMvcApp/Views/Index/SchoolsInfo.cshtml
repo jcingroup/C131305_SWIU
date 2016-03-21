@@ -1,0 +1,27 @@
+﻿@model ProcCore.Business.Logic.m_Department
+@{
+    ViewBag.Title = Model.name;
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+@section styles {
+    <link rel="stylesheet" href="~/Content/css/page.css">
+}
+<ul class="breadCrumb">
+    <li><a href="~/index">HOME</a></li>
+    <li>@Model.name</li>
+</ul>
+@RenderPage("~/Views/Shared/sidebar.cshtml")
+<div id="content">
+    @Html.DropDownList("departmentmenu", (List<SelectListItem>)ViewBag.Option_Department)
+    @Html.Raw(Model.pagecontext)
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+
+
+        $('#departmentmenu').change(function () {
+            document.location.href = '@Url.Action("SchoolsInfo","Index")/?department=' + $(this).val();
+        }).val(@Model.ids);
+    });
+</script>

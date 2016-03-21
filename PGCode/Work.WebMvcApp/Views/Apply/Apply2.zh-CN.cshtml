@@ -1,0 +1,75 @@
+﻿@model DotWeb.Apply
+@{
+    ViewBag.Title = "在线报名";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+@section styles {
+    <link rel="stylesheet" href="~/Content/css/page.css">
+}
+
+<ul class="breadCrumb">
+    <li><a href="~/index">HOME</a></li>
+    <li>在线报名</li>
+</ul>
+
+@RenderPage("~/Views/Shared/sidebar.cshtml")
+
+<div id="content">
+    
+    <h3>在线报名</h3>
+    
+    <p>请确认填写资料是否正确，资料送出後即无法修改。</p>
+    
+    <p>
+      <em>姓名:</em>
+      @Model.name
+    </p>
+    <p>
+      <em>联络电话:</em>
+      @Model.tel
+    </p>
+    <p>
+      <em>E-mail:</em>
+      @Model.email
+    </p>
+    <p>
+      <em>希望就读学系:</em>
+      <span>@Model.ex_school<br>@Model.ex_department</span>
+    </p>
+    <p>
+      <em>居住国家:</em>
+      @Model.country
+    </p>
+    <p>
+      <em>备注:</em>
+      <span>@Model.memo</span>
+    </p>
+      
+    <p class="center">
+      <input class="btn" type="button" value="确认送出" id="sendmail" /><!--资料送出後,弹出寄送成功之类的对话框,画面跳回首页-->
+      <input class="btn" type="button" value="回上一页修改" id="btn_return" />
+    </p>
+    
+</div><!-- content //-->
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#btn_return').click(function () {
+            //document.location.href = 'Apply';
+            //event.preventDefault();
+            history.back(1);
+        });
+
+        $('#sendmail').click(function () {
+            $.post('ajax_sendmail', {}).done(function (data, textStatus, jqXHR) {
+                var r = jQuery.parseJSON(data);
+                if (r) {
+                    alert('信件已寄出!');
+                    document.location.href = '@Url.Content("~")';
+                } else {
+                    alert('信件寄送失敗!')
+                }
+            });
+                });
+    });
+</script>

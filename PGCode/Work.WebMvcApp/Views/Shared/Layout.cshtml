@@ -1,0 +1,116 @@
+﻿@{
+    ViewBag.Title = Resources.ResWeb.WebTitle;
+}
+<!DOCTYPE html>
+<html>
+<!-- saved from url=(0014)about:internet -->
+<head>
+    <meta charset="UTF-8">
+    <title>@ViewBag.Title</title>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    
+    <script type="text/javascript">
+        var gb_approot = '@Url.Content("~")';
+        var gb_area = '@ViewBag.area';
+        var gb_controller = '@ViewBag.controller';
+    </script>
+    <script type="text/javascript" src="~/_Code/jqScript/webfunc.js"></script>
+    @RenderSection("styles", true)
+</head>
+
+<body class="@ViewBag.BodyClass">
+
+    <div id="container">
+
+        <div id="header">
+            <h1 onclick="location.href='@Url.Content("~/index")'" title="回首頁">SWIU:Spiritualitp Wisdom Inspiration Understanding</h1>
+            <ul id="menu">
+                <li><a class="nav1" href="~/Index/PageInfo/?kid=1">學校簡介</a></li>
+                <li><a class="nav2" href="~/Index/PageInfo/?kid=2">校長的話</a></li>
+                <li><a class="nav3" href="~/News/News">最新消息</a></li>
+                <li><a class="nav4" href="~/Index/PageInfo/?kid=4">策略聯盟</a></li>
+                <li><a class="nav5" href="~/Index/PageInfo/?kid=5">教職員</a></li>
+                <li><a class="nav6" href="~/Index/PageInfo/?kid=6">學校榮譽</a></li>
+                <li><a class="nav7" href="~/Index/PageInfo/?kid=7">教育目標</a></li>
+            </ul>
+
+            <ul id="menu2">
+                <li><a class="nav1" href="~/Index/PageInfo/?kid=8">招生公告</a></li>
+                <li><a class="nav2" href="~/Index/PageInfo/?kid=9">學費</a></li>
+                <li><a class="nav3" href="~/Index/PageInfo/?kid=10">入學條件</a></li>
+                <!--li><a class="nav4" href="~/Index/PageInfo/?kid=11">線上報名</a></li-->
+                <li><a class="nav4" href="~/Apply/Apply">線上報名</a></li>
+                <li><a class="nav5" href="~/Index/PageInfo/?kid=12">簡章下載</a></li>
+                <li><a class="nav6" href="~/Index/PageInfo/?kid=13">開設學系</a></li>
+                <li><a class="nav7" href="~/Index/PageInfo/?kid=14">畢業條件</a></li>
+                <li><a class="nav8" href="~/Index/PageInfo/?kid=3">傑出校友</a></li>
+            </ul>
+
+            <ul class="topNav">
+                <li><a class="l" href="//220.130.220.89/weboffice/enus.php" target="_blank">遠距教學</a></li>
+                <li><a class="l" href="http://www.wuef.org/cica/" target="_blank">MOOC</a></li>
+                <li><a class="l" href="//220.130.220.89/" target="_blank">學生資料庫</a></li>
+                <li><a href="~/FAQ/FAQ">常見問題</a></li>
+                <li><a href="~/Ebook/Ebook">電子書</a></li>
+                <li><a class="en" href="@Url.Action("SetLanguage")?L=en-US&A=Index">English</a></li>
+                <li><a class="big5" href="@Url.Action("SetLanguage")?L=zh-TW&A=Index">繁體中文</a></li>
+                <li><a class="gb" href="@Url.Action("SetLanguage")?L=zh-CN&A=Index">简体中文</a></li>
+            </ul>
+
+
+        </div>
+        <!-- header //-->
+
+        <div id="main">
+
+            @RenderBody()
+
+        </div>
+        <!-- main //-->
+
+    </div>
+    <!--container //-->
+
+    <div id="footer">
+        <div class="warp">
+
+            <div class="copyright"><em>SWIU:Spiritualitp Wisdom Inspiration Understanding</em> &copy; 1958-<script>document.write(new Date().getFullYear())</script> ALL RIGHTS RESERVED.</div>
+
+            <ul class="share">
+                <li><a class="fb" href="#">Facebook</a></li>
+                <li><a class="twitter" href="#">twitter</a></li>
+            </ul>
+
+            <ul class="b_menu1">
+                <li><a class="nav1" href="~/Index/PageInfo/?kid=1">學校簡介</a></li>
+                <li><a class="nav2" href="~/Index/PageInfo/?kid=2">校長的話</a></li>
+                <li><a class="nav3" href="~/News/News">最新消息</a></li>
+                <li><a class="nav4" href="~/Index/PageInfo/?kid=4">策略聯盟</a></li>
+                <li><a class="nav5" href="~/Index/PageInfo/?kid=5">教職員</a></li>
+                <li><a class="nav6" href="~/Index/PageInfo/?kid=6">學校榮譽</a></li>
+                <li><a class="nav7" href="~/Index/PageInfo/?kid=7">教育目標</a></li>
+            </ul>
+
+            <ul class="b_menu2">
+                <li><a class="nav1" href="~/Index/PageInfo/?kid=8">招生公告</a></li>
+                <li><a class="nav2" href="~/Index/PageInfo/?kid=9">學費</a></li>
+                <li><a class="nav3" href="~/Index/PageInfo/?kid=10">入學條件</a></li>
+                <li><a class="nav4" href="~/Index/PageInfo/?kid=11">線上報名</a></li>
+                <li><a class="nav5" href="~/Index/PageInfo/?kid=12">簡章下載</a></li>
+                <li><a class="nav6" href="~/Index/PageInfo/?kid=13">開設學系</a></li>
+                <li><a class="nav7" href="~/Index/PageInfo/?kid=14">畢業條件</a></li>
+                <li><a class="nav8" href="~/Index/PageInfo/?kid=3">傑出校友</a></li>
+            </ul>
+            <p>SWIU is accredited by the Accrediting for Independent Colleges and Schools Council (AICS). AICS is founded in 1912, AICS is the largest national accrediting organization of degree granting institutions. We accredit professional, technical and occupational programs, and are one of two national accreditors recognized by both the U.S. Department of Education and the Council for Higher Education Accreditation.</p>
+            <p class="contacts">台北市中正區忠孝東路二段23-31號 / Tel:02-2322-3646 / Fax:02-2356-8535</p>
+            <p class="contacts">台北市中山北路三段26號6樓之1 / Tel:02-2594-7739 / Fax:02-2593-1203</p>
+            <p class="contacts">新北市永和區中正路649號5樓之1 / Tel:02-2948-7098</p>
+            <p class="contacts">新北市中和區圓通路299巷48弄19號 / Tel:02-2594-7739 / Fax:02-2593-1203</p>
+            <p class="contacts">桃園市中壢區東興街121號 / Tel:03-4689493、0988-873-153 / Fax:03-4283055</p>
+            
+        </div>
+    </div>
+    <!-- footer //-->
+    <script src="~/Scripts/GoogleAnalytics.js"></script>
+</body>
+</html>

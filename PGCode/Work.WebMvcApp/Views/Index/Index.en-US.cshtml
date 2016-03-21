@@ -1,0 +1,104 @@
+﻿@{
+    ProcCore.Business.Logic.m_Schools[] mds = (ProcCore.Business.Logic.m_Schools[])ViewData["Sibar"];
+}
+@model DotWeb.FrontWeb
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+@section styles {
+    @* 多語共用css及script放在同目錄的commScript.cshtml *@
+    @Html.Partial("commScript")
+}
+
+<div id="banner">
+    <div id="slider">
+        <img src="~/Content/images/index/banner.jpg" data-thumb="~/Content/images/index/banner.jpg">
+        <img src="~/Content/images/index/banner2.jpg" data-thumb="~/Content/images/index/banner2.jpg">
+        <img src="~/Content/images/index/banner3.jpg" data-thumb="~/Content/images/index/banner3.jpg">
+    </div>
+    <!-- slider //-->
+</div>
+<!-- banner //-->
+<div id="sidebar">
+    <h3 class="t1">LATEST NEWS</h3>
+    <ol>
+        @foreach (var m in Model.news)
+        {
+            <li>
+                <img class="floatL" src="@Html.ImgSrc("Sys_Active", "NewsData", m.id, "DefaultKind", 120, "NoPic.JPG")">
+                <a href="~/News/News"><em>@m.set_date.ToString("MMMM dd")</em> @m.title ....</a>
+            </li>
+        }
+        <!--
+        <li>
+            <img class="floatL" src="~/Content/images/index/news1.jpg">
+            <a href="~/News/News"><em>April 20</em>LOREM IPSUM DOLOR SIT AMET, CONSECTETUER....</a>
+        </li>
+            -->
+    </ol>
+
+    <h3 class="t2">Alumni</h3>
+    <ul>
+        <li><a href="~/Index/PageInfo/?kid=3">Director for Alumni services Dr. Suliman A. Suliman,Ph.D</a></li>
+        <li><a href="~/Index/PageInfo/?kid=3">Assistant Director forAlumni services Mr. Aaron Peter Limon, MBA</a></li>
+    </ul>
+</div>
+<!-- sidebar //-->
+
+<div id="content">
+    <h3>Discover Our University!</h3>
+    <cite>“Won the U.S. Department of Education recognized university ranked 807”</cite>
+
+    <h4>ACCREDITATION SERVICE FOR INTERNATIONAL COLLEGES (ASIC)</h4>
+    <p><strong>SWIU</strong> is accredited by the Accreditation Service for International Colleges (ASIC). The University has earned Premier status with ASIC for its commendable areas of operation. ASIC is an approved accrediting body for the purposes of compliance by the UK Border Agency (UKBA) relating to the admission of students holding Student Visitor Visas and to the delivery of programmes in ESOL with Citizenship, is a member of the British Quality Foundation (BQF), sits on the Quality Standards Group of UK NARIC, and is one of a number of international accrediting bodies listed in the international directory by the Council for Higher Education Accreditation (CHEA) in the USA and is a member of the CHEA International Quality Group (CIQG). </p>
+    <a class="more" href="~/Index/PageInfo/?kid=1">More Information</a>
+
+    <hr>
+
+    <dl class="school">
+        <dt>School</dt>
+        @foreach (var md in mds)
+        {
+            if (md.dempartments.Count() > 0)
+            {
+            <dd><a href="~/Index/SchoolsInfo/?department=@md.dempartments.FirstOrDefault().ids">@md.name</a></dd>
+            }
+        }
+        <!--
+        @foreach (var m in Model.schools) { 
+            <dd><a href="~/School/School">@m.name</a></dd>
+        }
+        -->
+        <!--
+        <dd><a href="~/School/School">Business Administration & Management</a></dd>
+        <dd><a href="~/School/School">Modern Languages &Cultures</a></dd>
+        <dd><a href="~/School/School">Education</a></dd>
+        <dd><a href="~/School/School">Traditional Medicine</a></dd>
+        <dd><a href="~/School/School">Engineering</a></dd>
+        <dd><a href="~/School/School">Entertainment & Tourism</a></dd>
+        <dd><a href="~/School/School">Law</a></dd>
+        <dd><a href="~/School/School">Mass Communication & Journalism</a></dd>
+        <dd><a href="~/School/School">Music</a></dd>
+        <dd><a href="~/School/School">Nursing</a></dd>
+        <dd><a href="~/School/School">Public Affairs & Administration</a></dd>
+        <dd><a href="~/School/School">Sociology & Behavior Science</a></dd>
+        <dd><a href="~/School/School">Theology & Religion</a></dd>
+        <dd><a href="~/School/School">TQ LAB</a></dd>
+            -->
+    </dl>
+
+    <dl class="reward">
+        <dt>Reward</dt>
+        <dd><a href="http://www.educause.edu/Community/MemDir/SouthwestInternationalUniversity/199823" target="_blank">EDUCAUSE,Sponsored by U.S. Dept. of Education & Dept. of Commerce</a></dd>
+        <dd><a href="http://www.iemaa.webs.com/index.html" target="_blank">IEMAA, International Education Ministry Accreditation Association</a></dd>
+        <dd><a href="http://www.joinaama.com/" target="_blank">AAMA, American Alternative Medical Association</a></dd>
+        <dd><a href="http://www.usdla.org/" target="_blank">USDLA,The United States Distance Learning Association</a></dd>
+        <dd><a href="http://www.icde.org/" target="_blank">ICDE, International Council for Open and Distance Education</a></dd>
+        <dd><a href="http://www.homeopathy.org/" target="_blank">NASH, North American Society of Homeopaths</a></dd>
+        <dd><a href="http://www.musictherapy.org/" target="_blank">AMTA, American Music Therapy Association</a></dd>
+        <dd><a href="http://www.ngh.net/" target="_blank">NGH, National Guild of Hypnotists</a></dd>
+        <dd><a href="~/Index/PageInfo/?kid=6">Bears' Guide to Earning Degrees by Distance Learning</a></dd>
+    </dl>
+</div>
+<!-- content //-->

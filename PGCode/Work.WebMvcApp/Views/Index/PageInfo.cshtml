@@ -1,0 +1,17 @@
+﻿@model ProcCore.Business.Logic.m_PageData
+@{
+    ViewBag.Title = Model.pagename;
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+@section styles {
+    <link rel="stylesheet" href="~/Content/css/page.css">
+}
+
+<ul class="breadCrumb">
+    <li><a href="~/index">HOME</a></li>
+    <li>@Model.pagename</li>
+</ul>
+@RenderPage("~/Views/Shared/sidebar.cshtml")
+<div id="content">
+    @Html.Raw(Model.pagecontext)
+</div><!-- content //-->

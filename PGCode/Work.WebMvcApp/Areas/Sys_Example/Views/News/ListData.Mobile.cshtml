@@ -1,0 +1,63 @@
+﻿@model ProcCore.Business.Logic.q_NewsData
+@using ProcCore.JqueryHelp
+@using ProcCore.JqueryHelp.Mobile
+@using ProcCore.JqueryHelp.JQGridScript
+@using ProcCore.Business.Logic.TablesDescription
+@section IncludeScript{
+    @Html.Partial("includeScript_Comm")
+}
+@section MobileInit{
+}
+@{
+    NewsData Tab = new NewsData();
+    m_Page gpage = new m_Page() { theme = Themes.e, add_back_btn = true, title = "Sky Work Room" };
+    m_Header gheader = new m_Header() { theme = Themes.b };
+    m_Content gContent = new m_Content() { theme = Themes.c };
+    m_Footer gfooter = new m_Footer() { theme = Themes.d, position = Position._fixed };
+
+    m_CollapsibleSet clooapsible = new m_CollapsibleSet();
+    m_Button m_Button = new m_Button() { icon = Icon.arrow_d, mini = true, inline = true, theme = Themes.e, transition = Transition.slide };
+}
+<div id="gpage" @Html.Raw(gpage.ToAttribute())>
+    @Html.Partial("includeScript_Grid")
+    @Html.Partial("vucHeader")
+    @{
+        //定義Grid需格式化的欄位，以下為ID欄位轉換成Framework ICON並可點選，設定完成代至下到的Html.JQGridHelp中的HelpColumnModule要格式化的欄位並指定給formatterColumn屬性
+        FormatterColumnScript f_col_id = new FormatterColumnScript();
+        f_col_id.FunctionName = CommWebSetup.funNameMasterDataFormatterID;
+        f_col_id.FunctionString = Html.MobileGridIDColumnCommScript(CommWebSetup.MasterGridID, Url.Action(CommWebSetup.acNameEditMasterDataByID));
+
+        var gridobj = Html.jqGridMobile_Standard(
+    CommWebSetup.MasterGridID,
+    (String)ViewBag.Caption,
+    ViewData["Page"].ToString(),
+    ViewData["AppendQuertString"].ToString(),
+    Url.Action(CommWebSetup.acNameMasterDataGridUrl),
+    Url.Action(CommWebSetup.acNameMasterDataDelete),
+    Url.Action(CommWebSetup.acNameEditMasterDataAddNew),
+    300, null,
+        new MakeColumnModule() { CN = Resources.Res.ColModify, CM = { name = Tab.id.M, key = true, AssignFormatter = f_col_id } },
+        new MakeColumnModule() { CN = Html.FLang(Tab.Title.N), CM = { name = Tab.Title.M, editable = true } },
+        new MakeColumnModule() { CN = Html.FLang(Tab.SetDate.N), CM = { name = Tab.SetDate.M, align = "center" } },
+        new MakeColumnModule() { CN = Html.FLang(Tab.NewsKind.N), CM = { name = Tab.NewsKind.M, align = "center" } },
+        new MakeColumnModule() { CN = Html.FLang(Tab.IsOpen.N), CM = { name = Tab.IsOpen.M, align = "center" } }
+            );
+
+        gridobj.ToScriptHandle();
+
+        jqElementEvent mjq = new jqElementEvent(new jqSelector() { IdName = "gpage" }) { jqRaiseEvent = jqEventStyle.on };
+        mjq.events.Add(new jqElementEvent.jqEvents() { mobilePageEvent = MobilePageEvent.pageinit, funcString = gridobj.jqmbCustomScript });
+        mjq.events.Add(new jqElementEvent.jqEvents() { mobilePageEvent = MobilePageEvent.pagecreate, funcString = gridobj.jqFormatterScript + gridobj.jqmbGridScript });
+    }
+    @Html.Raw(gridobj.jqGridHtml)
+    <script type="text/javascript">
+        @Html.Raw(mjq.ToScriptString())
+    </script>
+</div>
+
+<div id="epage" @Html.Raw(gpage.ToAttribute())>
+    @Html.Partial("vucHeader")
+    <div @Html.Raw(gContent.ToAttribute())>
+        <h3>這是內容二</h3>
+    </div>
+</div>

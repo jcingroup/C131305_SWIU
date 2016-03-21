@@ -1,0 +1,66 @@
+﻿@model ProcCore.Business.Logic.m_NewsData
+@using ProcCore;
+@using ProcCore.WebCore;
+@using ProcCore.JqueryHelp;
+@using ProcCore.JqueryHelp.FormvValidate;
+@using ProcCore.JqueryHelp.AddressHandle;
+@using ProcCore.JqueryHelp.Mobile;
+@using ProcCore.Business.Logic.TablesDescription;
+
+@section IncludeScript{
+    @Html.Partial("includeScript_Comm")
+}
+@section MobileInit{
+}
+@{
+    m_Page gpage = new m_Page() { theme = Themes.e, add_back_btn = true, title = "Sky Work Room" };
+    m_Header gheader = new m_Header() { theme = Themes.b };
+    m_Content gContent = new m_Content() { theme = Themes.c };
+    m_Footer gfooter = new m_Footer() { theme = Themes.d, position = Position._fixed };
+
+    m_CollapsibleSet clooapsible = new m_CollapsibleSet();
+    m_Button m_Button = new m_Button() { icon= Icon.arrow_d, mini=true,inline=true , theme= Themes.e, transition= Transition.slide};
+}
+<div id="gpage" @Html.Raw(gpage.ToAttribute())>
+    @Html.Partial("vucHeader")
+    <div @Html.Raw(gContent.ToAttribute())>
+        <div data-role="collapsible-set">
+
+            <div data-role="collapsible" data-collapsed="false">
+                <h3>Section 1</h3>
+                <p>I'm the collapsible set content for section 1.</p>
+                <a href="#epage" @Html.Raw(m_Button.ToAttribute())>Open dialog</a>
+            </div>
+
+            <div data-role="collapsible">
+                <h3>Section 2</h3>
+                <p>I'm the collapsible set content for section 2.</p>
+            </div>
+
+        </div>
+    </div>
+    <div @Html.Raw(gfooter.ToAttribute())>
+        <h3>這是頁尾</h3>
+    </div>
+</div>
+
+<div id="epage" @Html.Raw(gpage.ToAttribute())>
+    <div @Html.Raw(gheader.ToAttribute())>
+        <h3>這是標頭二</h3>
+    </div>
+        <div @Html.Raw(gContent.ToAttribute())>
+        <h3>這是內容二</h3>
+    </div>
+</div>
+
+@{
+    jqElementEvent mjq = new jqElementEvent(new jqSelector() { IdName = "gpage" }) { jqRaiseEvent = jqEventStyle.on };
+
+    mjq.events.Add(new jqElementEvent.jqEvents() { mobilePageEvent = MobilePageEvent.pageinit, funcString = "" });
+    mjq.events.Add(new jqElementEvent.jqEvents() { mobilePageEvent = MobilePageEvent.pagecreate, funcString = "" });
+    mjq.events.Add(new jqElementEvent.jqEvents() { mobilePageEvent = MobilePageEvent.pageshow, funcString = "" });
+}
+
+<script type="text/javascript">
+    @Html.Raw(mjq.ToScriptString())
+</script>

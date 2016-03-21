@@ -1,0 +1,110 @@
+﻿@{
+    ViewBag.Title = "在线报名";
+    Layout = "~/Views/Shared/Layout.cshtml";
+    ProcCore.Business.Logic.m_Schools[] mds = (ProcCore.Business.Logic.m_Schools[])ViewData["Sibar"];
+
+    DotWeb.Apply ap;
+
+    if (Session["maildata"] != null)
+    {
+
+        ap = (DotWeb.Apply)Session["maildata"];
+    }
+    else
+    {
+
+        ap = new DotWeb.Apply();
+    }
+}
+
+@section styles {
+    <link rel="stylesheet" href="~/Content/css/page.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js" type="text/javascript"></script>
+}
+
+<ul class="breadCrumb">
+    <li><a href="~/index">HOME</a></li>
+    <li>在线报名</li>
+</ul>
+
+@RenderPage("~/Views/Shared/sidebar.cshtml")
+
+<div id="content">
+    
+    <h3>在线报名</h3>
+    
+    <p>有*记号为必填</p>
+    
+    <form action="Apply2" method="post" id="frm">
+    
+      <fieldset>
+        
+        <p>
+          <label>*姓名:</label>
+                <input type="text" name="name" required="required" value="@ap.name" />
+        </p>
+        
+        <p>
+          <label>*联络电话:</label>
+                <input type="tel" name="tel" required="required" value="@ap.tel" />
+        </p>
+        
+        <p>
+          <label>*E-mail:</label>
+          <input type="email" name="email" value="@ap.email" />
+        </p>
+        
+        <p>
+          <label>*希望就读学系:</label>
+                <select name="school" id="apply_school" required="required">
+                    <!--學院名稱在option裡-->
+                    @foreach (var md in mds)
+                    {
+                        <option value="@md.id">@md.name</option>
+                    }
+                </select>
+                <select name="department" id="apply_department" required="required">
+                    <!--學系名稱在option裡-->
+                </select>
+        </p>
+        
+        <p>
+          <label>*居住国家:</label>
+                <input type="text" name="country" required="required" value="@ap.country" />
+        </p>
+        
+        <p>
+          <label>备注:</label>
+          <textarea name="memo"></textarea>
+        </p>
+        
+      </fieldset>
+      
+      <p class="center">
+        <input class="btn" type="submit" value="送出" />
+        <input class="btn" type="button" value="清除重填" id="btn_reset" />
+      </p>
+      
+    </form>
+    
+</div><!-- content //-->
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#apply_school').selectajax({ relation_element: $('#apply_department'), data_url: '/Apply/ajax_GetDepartmentList' }).val();
+        $('#btn_reset').click(function () {
+            $('#frm')[0].reset();
+            $('#apply_school').trigger('change');
+        });
+    });
+</script>
+
+
+@if (Session["maildata"] != null)
+{
+    <script  type="text/javascript">
+        $(document).ready(function () {
+            $('#apply_school').val('@ap.school').trigger('change');
+            $('#apply_department').val('@ap.department');
+        });
+    </script>
+}

@@ -1,0 +1,38 @@
+﻿@model ProcCore.Business.Logic.m_消息D[]
+@using ProcCore.NetExtension;
+@{
+    ViewBag.Title = "News";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+@section styles {
+    <link rel="stylesheet" href="~/Content/css/page.css">
+}
+<ul class="breadCrumb">
+    <li><a href="~/index">HOME</a></li>
+    <li>@Resources.ResWeb.News</li>
+</ul>
+@RenderPage("~/Views/Shared/sidebar.cshtml")
+<div id="content">
+    
+    <h3>@Resources.ResWeb.News</h3>
+            
+    <img src="~/Content/images/News/cite.jpg">
+    
+    <ul class="news">
+        @foreach(var md in Model){
+        <li><em>@md.set_date.ToString("yyyy.MM.dd")</em><!-- 日期 -->
+            <a href="@Url.Action("News_content")/?id=@md.id">@md.title</a><!-- 標題 -->
+            <span>@md.context.RemovHtmlTag().Left(20) ...</span><!-- 內容摘要 -->
+        </li>
+        }
+    </ul>
+    
+    <ol class="pager">
+        <li class="prev"><a href="#">Previous</a></li>
+        <li class="current">1</li><!-- 當前頁 -->
+        <li><a href="#">Next ten</a></li>
+        <li class="next"><a href="#">Next</a></li>
+    </ol>
+    
+</div><!-- content //-->
